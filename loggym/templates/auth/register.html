@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Criar conta — logGYM{% endblock %}
+
+{% block content %}
+  <section class="form-wrapper auth-form">
+    <h1>Crie sua conta logGYM</h1>
+    <form method="post" class="post-form">
+      <div class="form-grid">
+        <label>
+          Nome
+          <input type="text" name="nome" placeholder="Ana" required />
+        </label>
+        <label>
+          Sobrenome
+          <input type="text" name="sobrenome" placeholder="Silva" required />
+        </label>
+      </div>
+      <label>
+        E-mail
+        <input type="email" name="email" placeholder="ana@loggym.com" required />
+      </label>
+      <label>
+        Senha
+        <input type="password" name="password" placeholder="Escolha uma senha forte" required />
+      </label>
+      <label>
+        Biografia
+        <textarea name="biografia" rows="4" placeholder="Conte um pouco sobre você"></textarea>
+      </label>
+      <label>
+        URL do avatar (opcional)
+        <input type="url" name="avatar_url" placeholder="https://..." />
+      </label>
+      <div class="form-actions">
+        <button type="submit" class="btn">Cadastrar</button>
+        <a class="btn btn-secondary" href="{{ url_for('login') }}">Já tenho conta</a>
+      </div>
+    </form>
+  </section>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Entrar — logGYM{% endblock %}
+
+{% block content %}
+  <section class="form-wrapper auth-form">
+    <h1>Acesse sua conta</h1>
+    <form method="post" class="post-form">
+      <input type="hidden" name="next" value="{{ next or url_for('index') }}" />
+      <label>
+        E-mail
+        <input type="email" name="email" placeholder="voce@loggym.com" required />
+      </label>
+      <label>
+        Senha
+        <input type="password" name="password" placeholder="••••••••" required />
+      </label>
+      <div class="form-actions">
+        <button type="submit" class="btn">Entrar</button>
+        <a class="btn btn-secondary" href="{{ url_for('register') }}">Criar conta</a>
+      </div>
+    </form>
+  </section>
+{% endblock %}
