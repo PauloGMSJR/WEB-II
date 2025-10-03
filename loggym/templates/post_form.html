@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% if post %}
+  {% set page_title = 'Editar post' %}
+{% else %}
+  {% set page_title = 'Novo post' %}
+{% endif %}
+{% block title %}{{ page_title }} — logGYM{% endblock %}
+
+{% block content %}
+  <section class="form-wrapper">
+    <h1>{{ page_title }}</h1>
+    <form method="post" class="post-form">
+      <label>
+        Título
+        <input type="text" name="title" value="{{ post['title'] if post else '' }}" required />
+      </label>
+
+      <label>
+        Slug (identificador amigável)
+        <input
+          type="text"
+          name="slug"
+          value="{{ post['slug'] if post else '' }}"
+          placeholder="ex: treino-hiit-manha"
+          required
+        />
+      </label>
+
+      <label>
+        Categoria
+        <input type="text" name="category" value="{{ post['category'] if post else '' }}" required />
+      </label>
+
+      <label>
+        Nível do treino
+        <input type="text" name="level" value="{{ post['level'] if post else '' }}" required />
+      </label>
+
+      <label>
+        Autor
+        <input type="text" name="author" value="{{ post['author'] if post else '' }}" required />
+      </label>
+
+      <label>
+        Conteúdo
+        <textarea name="content" rows="8" required>{{ post['content'] if post else '' }}</textarea>
+      </label>
+
+      <div class="form-actions">
+        <button type="submit" class="btn">Salvar</button>
+        <a class="btn btn-secondary" href="{{ url_for('index') }}">Cancelar</a>
+      </div>
+    </form>
+  </section>
+{% endblock %}

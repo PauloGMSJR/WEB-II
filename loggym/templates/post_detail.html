@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}{{ post['title'] }} — logGYM{% endblock %}
+
+{% block content %}
+  <article class="post-detail">
+    <header>
+      <div class="post-meta">
+        <span class="post-category">{{ post['category'] }}</span>
+        <span class="post-level">{{ post['level'] }}</span>
+      </div>
+      <h1>{{ post['title'] }}</h1>
+      <div class="post-info">
+        <span>por {{ post['author'] }}</span>
+        <time datetime="{{ post['created_at'] }}">{{ post['created_at'] | replace('T', ' ') }}</time>
+      </div>
+    </header>
+
+    <p class="post-content">{{ post['content'] | replace('\n', '<br>') | safe }}</p>
+
+    <div class="post-actions">
+      <a class="btn" href="{{ url_for('edit_post', slug=post['slug']) }}">Editar</a>
+      <form method="post" action="{{ url_for('delete_post', slug=post['slug']) }}" onsubmit="return confirm('Deseja excluir este post?');">
+        <button type="submit" class="btn btn-danger">Excluir</button>
+      </form>
+    </div>
+  </article>
+{% endblock %}
