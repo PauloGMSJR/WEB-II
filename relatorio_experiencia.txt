@@ -1,0 +1,9 @@
+Resumo das implementações:
+- Estruturei o blog logGYM com Flask e SQLite, incluindo tabelas de usuários, posts e curtidas.
+- Desenvolvi autenticação com registro, login, logout e proteção das rotas administrativas.
+- Ajustei os templates e estilos para refletirem o tema de academia e exibirem informações do autor, curtidas e navegação autenticada.
+
+Experiência e dificuldades:
+- A principal dificuldade foi alinhar as migrações do banco com os dados existentes, garantindo que posts antigos recebessem autores válidos sem perder conteúdo.
+- Também foi trabalhoso orquestrar o fluxo de sessão para evitar redirecionamentos inseguros e manter feedback claro para o usuário nas telas de login/registro.
+- Dediquei tempo adicional para harmonizar a identidade visual, equilibrando cores fortes com legibilidade em diferentes tamanhos de tela.
