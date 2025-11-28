@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}{{ post['title'] }} — logGYM{% endblock %}
+
+{% block content %}
+  <article class="post-detail">
+    <header>
+      <div class="post-meta">
+        <span class="post-category">{{ post['category'] }}</span>
+        <span class="post-level">{{ post['level'] }}</span>
+      </div>
+      <h1>{{ post['title'] }}</h1>
+      <div class="post-info">
+        <div class="author">
+          {% if post['author_avatar'] %}
+            <img src="{{ post['author_avatar'] }}" alt="Avatar do autor" />
+          {% endif %}
+          <div>
+            <span>por {{ post['author_name'] }}</span>
+            <time datetime="{{ post['created_at'] }}">{{ post['created_at'] | replace('T', ' ') }}</time>
+          </div>
+        </div>
+      </div>
+      {% if post['author_bio'] %}
+        <p class="author-bio">{{ post['author_bio'] }}</p>
+      {% endif %}
+    </header>
+
+    <p class="post-content">{{ post['content'] | replace('\n', '<br>') | safe }}</p>
+
+    <div class="post-actions">
+      <div class="likes-block">
+        {% if current_user %}
+          <form method="post" action="{{ url_for('toggle_like', slug=post['slug']) }}">
+            <button type="submit" class="btn {% if liked %}btn-secondary{% endif %}">
+              {% if liked %}Remover like{% else %}Curtir{% endif %} • ❤️ {{ post['likes_total'] }}
+            </button>
+          </form>
+        {% else %}
+          <a class="btn btn-secondary" href="{{ url_for('login', next=request.path) }}">
+            Entre para curtir • ❤️ {{ post['likes_total'] }}
+          </a>
+        {% endif %}
+      </div>
+
+      {% if is_owner %}
+        <a class="btn" href="{{ url_for('edit_post', slug=post['slug']) }}">Editar</a>
+        <form method="post" action="{{ url_for('delete_post', slug=post['slug']) }}" onsubmit="return confirm('Deseja excluir este post?');">
+          <button type="submit" class="btn btn-danger">Excluir</button>
+        </form>
+      {% endif %}
+    </div>
+  </article>
+{% endblock %}
